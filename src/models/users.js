@@ -7,12 +7,21 @@ const getAllUsers = () => {
 };
 
 const createNewUser = (body) => {
-  const SQLQUery = `INSERT INTO users (username, gender, role, email, handphone, birthdate)
+  const SQLQuery = `INSERT INTO users (username, gender, role, email, handphone, birthdate)
                     VALUES('${body.username}', '${body.gender}', '${body.role}', '${body.email}', '${body.handphone}', '${body.birthdate}')`;
 
-  return dbPool.execute(SQLQUery);
+  return dbPool.execute(SQLQuery);
+};
+
+const updateUser = (body, id) => {
+  const SQLQuery = `UPDATE users 
+                        SET username='${body.username}', gender='${body.gender}', role='${body.role}', email='${body.email}', handphone='${body.handphone}', birthdate='${body.birthdate}'
+                        WHERE id=${id}`;
+
+  return dbPool.execute(SQLQuery);
 };
 module.exports = {
   getAllUsers,
   createNewUser,
+  updateUser,
 };
