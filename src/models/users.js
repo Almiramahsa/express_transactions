@@ -13,6 +13,8 @@ const createNewUser = (body) => {
   return dbPool.execute(SQLQuery);
 };
 
+//UPDATE USER
+
 const updateUser = (body, id) => {
   const SQLQuery = `UPDATE users 
                         SET username='${body.username}', gender='${body.gender}', role='${body.role}', email='${body.email}', handphone='${body.handphone}', birthdate='${body.birthdate}'
@@ -20,8 +22,16 @@ const updateUser = (body, id) => {
 
   return dbPool.execute(SQLQuery);
 };
+
+//DELETE USER
+const deleteUser = (id) => {
+  const SQLQuery = `DELETE FROM users WHERE id=${id}`;
+  return dbPool.execute(SQLQuery);
+};
+
 module.exports = {
   getAllUsers,
   createNewUser,
   updateUser,
+  deleteUser,
 };
