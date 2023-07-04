@@ -1,0 +1,24 @@
+{
+  "name": "express-transactions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Almiramahsa/express_transactions.git"
+  },
+  "author": "Almira Mahsa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Almiramahsa/express_transactions/issues"
+  },
+  "homepage": "https://github.com/Almiramahsa/express_transactions#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  }
+}
