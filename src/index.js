@@ -5,6 +5,8 @@ const express = require('express');
 
 //export file users
 const usersRoutes = require('./routes/users');
+const bankRoutes = require('./routes/bank_account');
+
 const middlewareLogRequest = require('./middleware/log');
 
 const app = express();
@@ -18,7 +20,7 @@ app.use(express.json());
 //patern routing di express = app.method(path, handler)
 //grouping per routes
 app.use('/users', usersRoutes);
-
+app.use('/bank', bankRoutes);
 //project express akan menjalankan PORT 4000
 app.listen(PORT, () => {
   console.log(`Server berhasil di running di port ${PORT}`);
