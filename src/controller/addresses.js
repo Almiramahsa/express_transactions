@@ -1,6 +1,6 @@
 const AddressModel = require('../models/addresses');
 
-//GET ALL BANK ACCOUNT
+//GET ALL ADDRESS
 const getAllAddress = async (req, res) => {
   try {
     const [data] = await AddressModel.getAllAddress();
@@ -16,6 +16,24 @@ const getAllAddress = async (req, res) => {
   }
 };
 
+//CREATE NEW ADDRESS
+const createNewAddress = async (req, res) => {
+  const { body } = req;
+  try {
+    await AddressModel.createNewAddress(body);
+    res.json({
+      message: 'CREATE new address success',
+      data: req.body,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
 module.exports = {
   getAllAddress,
+  createNewAddress,
 };

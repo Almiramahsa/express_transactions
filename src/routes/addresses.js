@@ -3,7 +3,7 @@ const AddressController = require('../controller/addresses');
 const router = express.Router();
 
 // //CREATE - METHOD: POST
-// router.post('/', BankController.createNewBankAccount);
+router.post('/', AddressController.createNewAddress);
 
 // READ - METHOD: GET
 router.get('/', AddressController.getAllAddress);

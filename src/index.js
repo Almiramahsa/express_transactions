@@ -1,4 +1,6 @@
 require('dotenv').config();
+// import cors from 'cors';
+import session from 'express-session';
 const PORT = process.env.PORT || 5000;
 
 const express = require('express');
@@ -18,6 +20,26 @@ app.use(middlewareLogRequest);
 //middleware req body json
 app.use(express.json());
 
+// //middleware CORS
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: 'http://localhost:3000',
+//   })
+// );
+
+//Middleware session
+//Middleware session digunakan untuk menyimpan data sesi pengguna antara permintaan dan tanggapan
+app.use(
+  session({
+    secret: process.env.SESS_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: 'auto',
+    },
+  })
+);
 //patern routing di express = app.method(path, handler)
 //grouping per routes
 app.use('/users', usersRoutes);
