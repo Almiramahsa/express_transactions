@@ -9,7 +9,7 @@ router.post('/', BankController.createNewBankAccount);
 router.get('/', BankController.getAllBankAccount);
 
 // //UPDATE - METHOD : PATCH
-// router.patch('/:id', UserController.updateUser);
+router.patch('/:id', BankController.updateBankAccount);
 
 // //DELETE - METHOD : DELETE
 // router.delete('/:id', UserController.deleteUser);

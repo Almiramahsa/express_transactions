@@ -33,7 +33,27 @@ const createNewBankAccount = async (req, res) => {
   }
 };
 
+//UPDATE BANK ACCOUNT
+const updateBankAccount = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+
+  try {
+    await BankModel.updateBankAccount(body, id);
+    res.json({
+      message: 'UPDATE bank account success',
+      data: { id: id, ...body },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
 module.exports = {
   getAllBankAccount,
   createNewBankAccount,
+  updateBankAccount,
 };

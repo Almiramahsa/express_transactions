@@ -15,7 +15,18 @@ const createNewBankAccount = (body) => {
   return dbPool.execute(SQLQuery);
 };
 
+//UPDATE USER
+
+const updateBankAccount = (body, id) => {
+  const SQLQuery = `UPDATE bank_account 
+                          SET bank_name='${body.bank_name}', account_number='${body.account_number}', holder_name='${body.holder_name}', user_id='${body.user_id}'
+                          WHERE id=${id}`;
+
+  return dbPool.execute(SQLQuery);
+};
+
 module.exports = {
   getAllBankAccount,
   createNewBankAccount,
+  updateBankAccount,
 };
