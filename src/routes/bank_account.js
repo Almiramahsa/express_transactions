@@ -3,10 +3,11 @@ const BankController = require('../controller/bank_account');
 const router = express.Router();
 
 // //CREATE - METHOD: POST
-// router.post('/', UserController.createNewUser);
+router.post('/', BankController.createNewBankAccount);
 
 // READ - METHOD: GET
 router.get('/', BankController.getAllBankAccount);
+
 // //UPDATE - METHOD : PATCH
 // router.patch('/:id', UserController.updateUser);
 
