@@ -15,7 +15,7 @@ const createNewBankAccount = (body) => {
   return dbPool.execute(SQLQuery);
 };
 
-//UPDATE USER
+//UPDATE BANK ACCOUNT
 
 const updateBankAccount = (body, id) => {
   const SQLQuery = `UPDATE bank_account 
@@ -25,8 +25,16 @@ const updateBankAccount = (body, id) => {
   return dbPool.execute(SQLQuery);
 };
 
+//DELETE BANK ACCOUNT USER
+
+const deleteBankAccount = (id) => {
+  const SQLQuery = `DELETE FROM bank_account WHERE id=${id}`;
+  return dbPool.execute(SQLQuery);
+};
+
 module.exports = {
   getAllBankAccount,
   createNewBankAccount,
   updateBankAccount,
+  deleteBankAccount,
 };

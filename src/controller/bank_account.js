@@ -52,8 +52,25 @@ const updateBankAccount = async (req, res) => {
   }
 };
 
+//DELETE BANK ACCOUNT
+const deleteBankAccount = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await BankModel.deleteBankAccount(id);
+    res.json({
+      message: 'DELETE Bank Account Success',
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
 module.exports = {
   getAllBankAccount,
   createNewBankAccount,
   updateBankAccount,
+  deleteBankAccount,
 };

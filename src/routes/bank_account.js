@@ -12,6 +12,6 @@ router.get('/', BankController.getAllBankAccount);
 router.patch('/:id', BankController.updateBankAccount);
 
 // //DELETE - METHOD : DELETE
-// router.delete('/:id', UserController.deleteUser);
+router.delete('/:id', BankController.deleteBankAccount);
 
 module.exports = router;
