@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Box, Container, Flex, Icon, Avatar, HStack, Link, IconButton, Button, Menu, MenuButton, MenuList, MenuItem, MenuDivider, useDisclosure, useColorModeValue, Stack } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { FiShoppingCart, FiLogOut } from 'react-icons/fi';
+import { useScrollPosition } from '@/app/hooks/useScrollPosition';
 
 const Links = ['Dashboard', 'Projects', 'Team'];
-
+const scrollPosition = useScrollPosition();
 const NavLink = ({ children }) => (
   <Link
     px={2}
@@ -26,7 +27,7 @@ export default function Simple() {
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box className={`sticky top-0 z-50 transition-shadow ${scrollPosition > 0 ? 'shadow bg-opacity-70 backdrop-blur-lg backdrop-filter' : 'shadow-none'}`} bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Container as={Stack} maxW={'6xl'} py={2}>
           <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
             <IconButton size={'md'} icon={isOpen ? <CloseIcon /> : <HamburgerIcon />} aria-label={'Open Menu'} display={{ md: 'none' }} onClick={isOpen ? onClose : onOpen} />
