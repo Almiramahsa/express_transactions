@@ -1,11 +1,11 @@
-const AddressModel = require('../models/addresses');
+const ProductModel = require('../models/products');
 
-//GET ALL ADDRESS
-const getAllAddress = async (req, res) => {
+//GET ALL PRODUCTS
+const getAllProducts = async (req, res) => {
   try {
-    const [data] = await AddressModel.getAllAddress();
+    const [data] = await ProductModel.getAllProducts();
     res.json({
-      message: 'GET all address success',
+      message: 'GET all products success',
       data: data,
     });
   } catch (error) {
@@ -17,12 +17,12 @@ const getAllAddress = async (req, res) => {
 };
 
 //CREATE NEW ADDRESS
-const createNewAddress = async (req, res) => {
+const createNewProduct = async (req, res) => {
   const { body } = req;
   try {
-    await AddressModel.createNewAddress(body);
+    await ProductModel.createNewProduct(body);
     res.json({
-      message: 'CREATE new address success',
+      message: 'CREATE new product success',
       data: req.body,
     });
   } catch (error) {
@@ -34,14 +34,14 @@ const createNewAddress = async (req, res) => {
 };
 
 //UPDATE ADDRESS
-const updateAddress = async (req, res) => {
+const updateProduct = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
   try {
-    await AddressModel.updateAddress(body, id);
+    await ProductModel.updateProduct(body, id);
     res.json({
-      message: 'UPDATE Address success',
+      message: 'UPDATE product success',
       data: { id: id, ...body },
     });
   } catch (error) {
@@ -52,13 +52,13 @@ const updateAddress = async (req, res) => {
   }
 };
 
-//DELETE ADDRESS
-const deleteAddress = async (req, res) => {
+//DELETE PRODUCT
+const deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
-    await AddressModel.deleteAddress(id);
+    await ProductModel.deleteProduct(id);
     res.json({
-      message: 'DELETE Address Success',
+      message: 'DELETE product Success',
     });
   } catch (error) {
     res.status(500).json({
@@ -68,8 +68,8 @@ const deleteAddress = async (req, res) => {
   }
 };
 module.exports = {
-  getAllAddress,
-  createNewAddress,
-  updateAddress,
-  deleteAddress,
+  getAllProducts,
+  createNewProduct,
+  updateProduct,
+  deleteProduct,
 };

@@ -1,6 +1,6 @@
 require('dotenv').config();
 // import cors from 'cors';
-import session from 'express-session';
+// import session from 'express-session';
 const PORT = process.env.PORT || 5000;
 
 const express = require('express');
@@ -9,6 +9,7 @@ const express = require('express');
 const usersRoutes = require('./routes/users');
 const bankRoutes = require('./routes/bank_account');
 const addressRoutes = require('./routes/addresses');
+const productsRoutes = require('./routes/products');
 
 const middlewareLogRequest = require('./middleware/log');
 
@@ -30,21 +31,22 @@ app.use(express.json());
 
 //Middleware session
 //Middleware session digunakan untuk menyimpan data sesi pengguna antara permintaan dan tanggapan
-app.use(
-  session({
-    secret: process.env.SESS_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: 'auto',
-    },
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SESS_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//       secure: 'auto',
+//     },
+//   })
+// );
 //patern routing di express = app.method(path, handler)
 //grouping per routes
 app.use('/users', usersRoutes);
 app.use('/bank', bankRoutes);
 app.use('/address', addressRoutes);
+app.use('/products', productsRoutes);
 
 //project express akan menjalankan PORT 4000
 app.listen(PORT, () => {

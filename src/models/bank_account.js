@@ -15,7 +15,7 @@ const createNewBankAccount = (body) => {
   return dbPool.execute(SQLQuery);
 };
 
-//UPDATE BANK ACCOUNT
+//UPDATE BANK ACCOUNT BY ID
 
 const updateBankAccount = (body, id) => {
   const SQLQuery = `UPDATE bank_account 
