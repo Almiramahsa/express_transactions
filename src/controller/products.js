@@ -33,7 +33,7 @@ const createNewProduct = async (req, res) => {
   }
 };
 
-//UPDATE ADDRESS
+//UPDATE PRODUCT
 const updateProduct = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
