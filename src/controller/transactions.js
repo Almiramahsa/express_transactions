@@ -1,7 +1,7 @@
-const ProductModel = require('../models/products');
+const TransactionsModel = require('../models/transactions');
 
-//GET ALL PRODUCTS
-const getAllProducts = async (req, res) => {
+//GET ALL TRANSACTIONS
+const getAllTransactions = async (req, res) => {
   try {
     const [data] = await ProductModel.getAllProducts();
     res.json({
@@ -15,19 +15,19 @@ const getAllProducts = async (req, res) => {
     });
   }
 };
-//GET PRODUCT BY ID
+//GET TRANSACTIONS BY ID
 
-const getProductById = async (req, res) => {
+const getTransactionById = async (req, res) => {
   const { id } = req.params;
   try {
-    const [product] = await ProductModel.getProductById(id);
-    if (product.length === 0) {
+    const [transaction] = await TransactionsModel.getTransactionById(id);
+    if (transaction.length === 0) {
       return res.status(404).json({
-        message: 'Product not found',
+        message: 'Transaction not found',
       });
     }
     res.json({
-      message: 'GET product by ID success',
+      message: 'GET transaction by ID success',
       data: product,
     });
   } catch (error) {
@@ -38,13 +38,13 @@ const getProductById = async (req, res) => {
   }
 };
 
-//CREATE NEW PRODUCT
-const createNewProduct = async (req, res) => {
+//CREATE NEW TRANSACTIONS
+const createNewTransaction = async (req, res) => {
   const { body } = req;
   try {
-    await ProductModel.createNewProduct(body);
+    await TransactionsModel.createNewTransaction(body);
     res.json({
-      message: 'CREATE new product success',
+      message: 'CREATE new transaction success',
       data: body,
     });
   } catch (error) {
@@ -55,15 +55,15 @@ const createNewProduct = async (req, res) => {
   }
 };
 
-//UPDATE PRODUCT
-const updateProduct = async (req, res) => {
+//UPDATE TRANSACTIONS
+const updateTransaction = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
   try {
     await ProductModel.updateProduct(body, id);
     res.json({
-      message: 'UPDATE product success',
+      message: 'UPDATE transaction success',
       data: { id: id, ...body },
     });
   } catch (error) {
@@ -74,18 +74,18 @@ const updateProduct = async (req, res) => {
   }
 };
 
-//DELETE PRODUCT
-const deleteProduct = async (req, res) => {
+//DELETE TRANSACTIONS
+const deleteTransaction = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await ProductModel.deleteProduct(id);
+    const result = await TransactionsModel.deleteTransaction(id);
     if (result.affectedRows === 0) {
       return res.status(404).json({
-        message: 'Product not found',
+        message: 'Transaction not found',
       });
     }
     res.json({
-      message: 'DELETE product success',
+      message: 'DELETE transaction success',
     });
   } catch (error) {
     res.status(500).json({
@@ -96,9 +96,9 @@ const deleteProduct = async (req, res) => {
 };
 
 module.exports = {
-  getAllProducts,
-  getProductById,
-  createNewProduct,
-  updateProduct,
-  deleteProduct,
+  getAllTransactions,
+  getTransactionById,
+  createNewTransaction,
+  updateTransaction,
+  deleteTransaction,
 };

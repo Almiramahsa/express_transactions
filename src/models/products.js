@@ -16,25 +16,27 @@ const getProductById = (id) => {
 
 // CREATE NEW PRODUCT
 const createNewProduct = (product) => {
-  const { product_name, price, description, product_image, product_id } = product;
-  const SQLQuery = `INSERT INTO products (product_name, price, description, product_image, product_id)
-                    VALUES('${product_name}', ${price}, '${description}', '${product_image}', ${product_id})`;
+  const { product_name, price, description, product_image } = product;
+  const SQLQuery = `INSERT INTO products (product_name, price, description, product_image)
+                    VALUES ('${product_name}', ${price}, '${description}', '${product_image}')`;
 
   return dbPool.execute(SQLQuery);
 };
 
 // UPDATE PRODUCT BY ID
-const updateProduct = (id, updatedProduct) => {
-  const { product_name, price, description, product_image, product_id } = updatedProduct;
-  const SQLQuery = `UPDATE products SET 
-                    product_name = '${product_name}',
-                    price = ${price},
-                    description = '${description}',
-                    product_image = '${product_image}',
-                    product_id = ${product_id}
-                    WHERE id = ${id}`;
+const updateProduct = (product, id) => {
+  const { product_name, price, description, product_image } = product;
+  const SQLQuery = `
+    UPDATE products
+    SET product_name = '${product_name}', price = ${price}, description = '${description}', product_image = '${product_image}'
+    WHERE id = ${id}
+  `;
 
   return dbPool.execute(SQLQuery);
+};
+
+module.exports = {
+  updateProduct,
 };
 
 // DELETE PRODUCT BY ID
