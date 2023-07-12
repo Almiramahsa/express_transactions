@@ -1,11 +1,11 @@
 const TransactionsModel = require('../models/transactions');
 
-//GET ALL TRANSACTIONS
+// GET ALL TRANSACTIONS
 const getAllTransactions = async (req, res) => {
   try {
-    const [data] = await ProductModel.getAllProducts();
+    const [data] = await TransactionsModel.getAllTransactions();
     res.json({
-      message: 'GET all products success',
+      message: 'GET all transactions success',
       data: data,
     });
   } catch (error) {
@@ -15,8 +15,8 @@ const getAllTransactions = async (req, res) => {
     });
   }
 };
-//GET TRANSACTIONS BY ID
 
+// GET TRANSACTION BY ID
 const getTransactionById = async (req, res) => {
   const { id } = req.params;
   try {
@@ -28,7 +28,7 @@ const getTransactionById = async (req, res) => {
     }
     res.json({
       message: 'GET transaction by ID success',
-      data: product,
+      data: transaction,
     });
   } catch (error) {
     res.status(500).json({
@@ -38,7 +38,7 @@ const getTransactionById = async (req, res) => {
   }
 };
 
-//CREATE NEW TRANSACTIONS
+// CREATE NEW TRANSACTION
 const createNewTransaction = async (req, res) => {
   const { body } = req;
   try {
@@ -55,13 +55,13 @@ const createNewTransaction = async (req, res) => {
   }
 };
 
-//UPDATE TRANSACTIONS
+// UPDATE TRANSACTION
 const updateTransaction = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
   try {
-    await ProductModel.updateProduct(body, id);
+    await TransactionsModel.updateTransaction(body, id);
     res.json({
       message: 'UPDATE transaction success',
       data: { id: id, ...body },
@@ -74,12 +74,12 @@ const updateTransaction = async (req, res) => {
   }
 };
 
-//DELETE TRANSACTIONS
+// DELETE TRANSACTION
 const deleteTransaction = async (req, res) => {
   const { id } = req.params;
   try {
     const result = await TransactionsModel.deleteTransaction(id);
-    if (result.affectedRows === 0) {
+    if (result.changedRows === 0) {
       return res.status(404).json({
         message: 'Transaction not found',
       });

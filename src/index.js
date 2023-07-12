@@ -1,54 +1,44 @@
 require('dotenv').config();
-// import cors from 'cors';
-// import session from 'express-session';
-const PORT = process.env.PORT || 5000;
-
+const cors = require('cors');
 const express = require('express');
-
-//export file users
+const cookieParser = require('cookie-parser');
+const tokenVerify = require('./middleware/verifyToken');
 const usersRoutes = require('./routes/users');
 const bankRoutes = require('./routes/bank_account');
-const addressRoutes = require('./routes/addresses');
+const addressessRoutes = require('./routes/addresses');
 const productsRoutes = require('./routes/products');
+const transactionsRoutes = require('./routes/transactions');
+const transactionItemRoutes = require('./routes/transaction_item');
+const authRoutes = require('./routes/user_auth');
 
 const middlewareLogRequest = require('./middleware/log');
 
 const app = express();
 
-//middleware req Log Request
 app.use(middlewareLogRequest);
-
-//middleware req body json
 app.use(express.json());
+app.use(cookieParser());
 
-// //middleware CORS
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: 'http://localhost:3000',
-//   })
-// );
+app.use(
+  cors({
+    credentials: true,
+    methods: ['POST', 'GET', 'PATCH', 'DELETE'],
+    origin: 'http://localhost:3000',
+  })
+);
+// Apply verifyToken middleware to all routes
+app.use('/auth', authRoutes);
 
-//Middleware session
-//Middleware session digunakan untuk menyimpan data sesi pengguna antara permintaan dan tanggapan
-// app.use(
-//   session({
-//     secret: process.env.SESS_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       secure: 'auto',
-//     },
-//   })
-// );
-//patern routing di express = app.method(path, handler)
-//grouping per routes
+app.use(tokenVerify);
+
 app.use('/users', usersRoutes);
 app.use('/bank', bankRoutes);
-app.use('/address', addressRoutes);
+app.use('/address', addressessRoutes);
 app.use('/products', productsRoutes);
+app.use('/transactions', transactionsRoutes);
+app.use('/transaction_item', transactionItemRoutes);
 
-//project express akan menjalankan PORT 4000
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server berhasil di running di port ${PORT}`);
+  console.log(`Server berhasil dijalankan di port ${PORT}`);
 });

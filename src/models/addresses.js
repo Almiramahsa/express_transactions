@@ -12,7 +12,7 @@ const getAllAddress = () => {
 
 const createNewAddress = (body) => {
   const SQLQuery = `INSERT INTO addresses (address, pinpoint, address_label, note, recipients_name, user_id)
-                        VALUES('${body.address}', '${body.pinpoint}', '${body.address_label}', '${body.note}', '${body.recipients_name}' '${body.user_id}')`;
+                        VALUES('${body.address}', '${body.pinpoint}', '${body.address_label}', '${body.note}', '${body.recipients_name}', '${body.user_id}')`;
 
   return dbPool.execute(SQLQuery);
 };

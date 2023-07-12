@@ -5,7 +5,7 @@ import { FiShoppingCart, FiLogOut } from 'react-icons/fi';
 import { useScrollPosition } from '@/app/hooks/useScrollPosition';
 
 const Links = ['Dashboard', 'Projects', 'Team'];
-const scrollPosition = useScrollPosition();
+
 const NavLink = ({ children }) => (
   <Link
     px={2}
@@ -21,9 +21,18 @@ const NavLink = ({ children }) => (
   </Link>
 );
 
-export default function Simple() {
+const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const scrollPosition = useScrollPosition();
+
+  // Tambahkan fungsi handleLogout
+  const handleLogout = () => {
+    // Lakukan tindakan logout yang sesuai di sini
+
+    // Contoh penggunaan useRouter untuk navigasi ke halaman login setelah logout
+    router.push('/signin');
+  };
 
   return (
     <>
@@ -51,7 +60,7 @@ export default function Simple() {
                         textDecoration: 'none',
                         color: useColorModeValue('blue.300', 'blue.200'),
                       }}
-                      href={'/signin'}
+                      href={'/profile'}
                     >
                       Profile
                     </Link>
@@ -62,14 +71,14 @@ export default function Simple() {
                         textDecoration: 'none',
                         color: useColorModeValue('blue.300', 'blue.200'),
                       }}
-                      href={'/signin'}
+                      href={'/transactions'}
                     >
                       Transactions
                     </Link>
                   </MenuItem>
                   <MenuDivider />
                   <MenuItem>
-                    <Flex alignItems="center">
+                    <Flex alignItems="center" onClick={handleLogout}>
                       <Icon as={FiLogOut} boxSize={5} marginRight={2} />
                       <Link
                         _hover={{
@@ -99,4 +108,6 @@ export default function Simple() {
       ) : null}
     </>
   );
-}
+};
+
+export default Navbar;

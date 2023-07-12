@@ -8,6 +8,9 @@ router.post('/', UserController.createNewUser);
 //READ - METHOD: GET
 router.get('/', UserController.getAllUsers);
 
+//READ - METHOD: GET BY ID
+router.get('/:id', UserController.getUserById);
+
 //UPDATE - METHOD : PATCH
 router.patch('/:id', UserController.updateUser);
 

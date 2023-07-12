@@ -32,6 +32,27 @@ const createNewUser = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [user] = await UsersModel.getUserById(id);
+    if (product.length === 0) {
+      return res.status(404).json({
+        message: 'user not found',
+      });
+    }
+    res.json({
+      message: 'GET user by ID success',
+      data: product,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Server Error',
+      serverMessage: error,
+    });
+  }
+};
+
 const updateUser = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
@@ -66,6 +87,7 @@ const deleteUser = async (req, res) => {
 };
 module.exports = {
   getAllUsers,
+  getUserById,
   createNewUser,
   updateUser,
   deleteUser,
